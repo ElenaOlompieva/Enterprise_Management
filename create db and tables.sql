@@ -19,7 +19,7 @@ CREATE TABLE Departments
 GO
 
 CREATE TABLE Employees_Roles_links  
-   (Link_id INT IDENTITY NOT NULL,
+   (Link_id INT IDENTITY PRIMARY KEY NOT NULL,
     Employee_id INT NOT NULL,
     Role_id INT NOT NULL,
     Active_From DATE NOT NULL,
@@ -27,10 +27,7 @@ CREATE TABLE Employees_Roles_links
 GO
 
 CREATE TABLE Roles_Departments_links  
-   (Link_id INT IDENTITY NOT NULL,
+   (Link_id INT IDENTITY PRIMARY KEY NOT NULL,
     Role_id INT NOT NULL,
-    Department_id INT NOT NULL,
-    Active_From DATE NOT NULL,
-    Active_To DATE);  
+    Department_id INT NOT NULL);  
 GO
-
