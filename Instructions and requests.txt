@@ -2,17 +2,21 @@
 EXEC Add_Roles @Employee_id = 0
               ,@Role_id = 0
               ,@Active_from = ''
--- Запрос для использования функции Add_Roles.
+-- Запрос для использования функции Add_Roles. С помощью этой функции можно добавить новую должность сотруднику.
 
 EXEC Change_Role @Employee_id = 0
                 ,@New_Role_id = 0
                 ,@Date = ''
--- Запрос для использования функции Change_Role.
+/*
+Запрос для использования функции Change_Role. С помощью этой функции можно изменить должность сотрудника. 
+Происходит закрытие старой должности и добавление новой с помощью добавления даты. 
+В данной функции дата закрытия старой должности и открытия новой равны (@Date = Active_To = Active_From).
+*/
 
 EXEC Delete_Roles @Employee_id = 0
                  ,@Role_id = 0
                  ,@Active_to = ''
--- Запрос для использования функции Delete_Roles.
+-- Запрос для использования функции Delete_Roles. С помощью этой функции можно удалить должность сотрудника.
 
 Задание 3.
 SELECT * FROM dbo.Get_Department_Employees('Высший менеджмент')
@@ -31,8 +35,8 @@ SELECT * FROM dbo.Get_Department_Employees('Юридический отдел')
 -- Запрос для формирования списка работников юридического отдела.
 
 Инструкция:
-Для написания скрипта использовалась программа: dbForge Studio for SQL Server.
-Для упрощения работы загрузки проекта на хостинг GitHub использовалась программа TortoiseGit.
+Для написания скрипта использовалась программа: dbForge Studio for SQL Server 2019.
+Для автоматизации процесса загрузки проекта на хостинг GitHub использовалась программа TortoiseGit.
 
 Для загрузки проекта через командную строку следует использовать следующие команды:
 $ git config --global user.email "email"
@@ -42,7 +46,7 @@ $ git config --global user.name "name"
 $ git clone https://github.com/ElenaOlompieva/Enterprise_Management.git
 -- Клонировать проект с удаленного git-репозитория по ссылке на проект.
 
-$ git add Instruction and requests.txt
+$ git add "Instruction and requests.txt"
 -- Команда позволяет добавить в индекс только нужный файл, в данном случае это файл с именем "Instruction and requests.txt".
 
 $ git commit -m 'Name commit'
@@ -52,6 +56,43 @@ $ git commit -am 'Name commit'
 -- Команда, которая эквивалентна последовательному вызову git add и git commit. 
 -- При вызове этой команды выполняется автоматический перевод всех измененных файлов в индексное состояние.
 
+$ git push 
+-- Команда, которая отправляет изменения в проекте на git-сервер.
+
+Для запуска следует:
+1. Установить программу dbForge Studio for SQL Server или аналог.
+2. Запустить и выполнить файл "Create db and tables.sql". Данный скрипт создаст базу данных и таблицы.
+3. Запустить и выполнить файл "Filling in tables.sql". Данный скрипт заполнит таблицы тестовыми данными.
+4. Запустить и выполнить файл "Get_Department_Employees.sql". Данный скрипт создаст функцию, с помощью которой можно будет получить список работников выбранного отдела.
+5. Запустить и выполнить файл "Add_Roles.sql". Данный скрипт создаст процедуру для добавления новой должности сотруднику.
+6. Запустить и выполнить файл "Change_Role.sql". Данный скрипт создаст процедуру для изменения должности сотрудника.
+7. Запустить и выполнить файл "Delete_Role.sql". Данный скрипт создаст процедуру для удаления должности сотрудника.
+8. Выполнить скрипты из файла "Instructions and requests.txt" для проверки.
+
+Дополнительные запросы:
+SELECT
+  e.Last_Name
+ ,e.First_Name
+ ,e.Middle_Name
+ ,r.Role_Name
+FROM Employees e
+JOIN Employees_Roles_links erl
+  ON e.Employee_id = erl.Employee_id
+JOIN Roles r
+  ON erl.Role_id = r.Role_id
+-- Запрос для получения списка всех сотрудников предприятия и их должности.
+
+SELECT
+  COUNT(Employee_id) AS 'Number_of_employees'
+ ,d.Department_Name
+FROM Employees_Roles_links erl
+JOIN Roles_Departments_links rdl
+  ON erl.Role_id = rdl.Role_id
+JOIN Departments d
+  ON rdl.Department_id = d.Department_id
+GROUP BY d.Department_Name
+ORDER BY 'Number_of_employees'
+-- Запрос для получения количества сотрудников по отделам.
 
 
 
