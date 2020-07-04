@@ -1,0 +1,66 @@
+Задание 2.
+EXEC Add_Roles @Employee_id = 0
+              ,@Role_id = 0
+              ,@Active_from = ''
+-- Запрос для использования функции Add_Roles.
+
+EXEC Change_Role @Employee_id = 0
+                ,@New_Role_id = 0
+                ,@Date = ''
+-- Запрос для использования функции Change_Role.
+
+EXEC Delete_Roles @Employee_id = 0
+                 ,@Role_id = 0
+                 ,@Active_to = ''
+-- Запрос для использования функции Delete_Roles.
+
+Задание 3.
+SELECT * FROM dbo.Get_Department_Employees('Высший менеджмент')
+--Запрос для получения списка руководителей отделов предприятия.
+
+SELECT * FROM dbo.Get_Department_Employees('Отдел информационных технологий')
+-- Запрос для формирования списка работников отдела информационных технологий.
+
+SELECT * FROM dbo.Get_Department_Employees('Экономический отдел')
+-- Запрос для формирования списка работников экономического отдела.
+
+SELECT * FROM dbo.Get_Department_Employees('Отдел кадров')
+-- Запрос для формирования списка работников отдела кадров.
+
+SELECT * FROM dbo.Get_Department_Employees('Юридический отдел')
+-- Запрос для формирования списка работников юридического отдела.
+
+Инструкция:
+Для написания скрипта использовалась программа: dbForge Studio for SQL Server.
+Для упрощения работы загрузки проекта на хостинг GitHub использовалась программа TortoiseGit.
+
+Для загрузки проекта через командную строку следует использовать следующие команды:
+$ git config --global user.email "email"
+$ git config --global user.name "name"
+-- Добавление подписи в виде эл. адреса и имени пользователя.
+
+$ git clone https://github.com/ElenaOlompieva/Enterprise_Management.git
+-- Клонировать проект с удаленного git-репозитория по ссылке на проект.
+
+$ git add Instruction and requests.txt
+-- Команда позволяет добавить в индекс только нужный файл, в данном случае это файл с именем "Instruction and requests.txt".
+
+$ git commit -m 'Name commit'
+-- Команда, которая позволяет сделать снимок проекта/зафиксировать изменения файлов, которые находятся в индексе.
+
+$ git commit -am 'Name commit'
+-- Команда, которая эквивалентна последовательному вызову git add и git commit. 
+-- При вызове этой команды выполняется автоматический перевод всех измененных файлов в индексное состояние.
+
+
+
+
+ 
+
+
+
+
+
+
+
+
